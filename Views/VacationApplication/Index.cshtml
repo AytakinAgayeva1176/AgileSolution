@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AgileTask.Domain.ViewModels.VacationApplicationViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Vacation Applications</h1>
+
+<a class="btn btn-secondary" asp-action="AddNewVacationApplication">Add New Vacation Application</a>
+
+<div class="card mt-3">
+    <div class="table-responsive text-nowrap">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Days)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody class="table-border-bottom-0">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                            @Html.DisplayFor(modelItem => item.User.Name)
+                            @Html.DisplayFor(modelItem => item.User.Surname)
+                        </td>
+                        <td> @Html.DisplayFor(modelItem => item.Days)</td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td> @Html.DisplayFor(modelItem => item.CreatedDate)</td>
+
+                        <td>
+                            @if (item.Status == AgileTask.Domain.Enums.Status.Pending)
+                            {
+                                <span class="badge bg-label-secondary me-1"> @Html.DisplayFor(modelItem => item.Status)</span>
+                            }
+                            else if (item.Status == AgileTask.Domain.Enums.Status.Accepted)
+                            {
+                                <span class="badge bg-label-success me-1"> @Html.DisplayFor(modelItem => item.Status)</span>
+                            }
+                            else if (item.Status == AgileTask.Domain.Enums.Status.Rejected)
+                            {
+                                <span class="badge bg-label-danger me-1"> @Html.DisplayFor(modelItem => item.Status)</span>
+                            }
+
+                        </td>
+
+
+                        @if (User.IsInRole("User") && item.Status == AgileTask.Domain.Enums.Status.Pending)
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning text-white">Edit</a>
+                            </td>
+                        }
+
+
+
+
+                        @if (User.IsInRole("HR"))
+                        {
+                            <td>
+                                <a asp-action="ChangeApplicationStatus" asp-route-id="@item.Id" asp-route-status="accepted" class="badge bg-label-success">Accept</a>
+                                <a asp-action="ChangeApplicationStatus" asp-route-id="@item.Id" asp-route-status="rejected" class="badge bg-label-danger">Reject</a>
+                            </td>
+                        }
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

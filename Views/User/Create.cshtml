@@ -1,0 +1,65 @@
+﻿@model AgileTask.Domain.ViewModels.CreateUserVM
+
+@{
+    ViewData["Title"] = "Create User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Create User</h1>
+<hr />
+
+<div class="content-wrapper">
+    <div class=" flex-grow-1 container-p-y">
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form asp-action="Create" asp-controller="User" method="post">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="mb-3">
+                                <label asp-for="Name" class="control-label"></label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Surname" class="control-label"></label>
+                                <input asp-for="Surname" class="form-control" />
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Password" class="control-label"></label>
+                                <input asp-for="Password" class="form-control" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="PositionId" class="control-label"></label>
+                                <select class="form-select" id="exampleFormControlSelect1" asp-for="PositionId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Positions"]" style=" width:100%"></select>
+                                <span asp-validation-for="PositionId" class="text-danger"></span>
+
+                            </div>
+                            <div class="mb-3">
+                                <label class="control-label">Department</label>
+                                <select class="form-select" id="exampleFormControlSelect1" asp-for="DepartmentId" asp-items="(IEnumerable<SelectListItem>)@ViewData["Departments"]" style=" width:100%"></select>
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="control-label"> Role</label>
+                                <select size=3 asp-for="RoleIds" asp-items="(IEnumerable<SelectListItem>)@ViewData["Roles"]" style=" width:100%"></select>
+                                <span asp-validation-for="RoleIds" class="text-danger"></span>
+
+                            </div>
+                            <button type="submit" value="Create" class="btn btn-primary">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-backdrop fade"></div>
+</div>
+

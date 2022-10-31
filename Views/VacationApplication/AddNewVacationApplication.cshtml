@@ -1,0 +1,42 @@
+﻿@model AgileTask.Domain.ViewModels.VacationApplicationViewModel
+
+@{
+    ViewData["Title"] = "AddNewVacationApplication";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>New Vacation Application</h1>
+
+<hr />
+
+
+<div class="content-wrapper">
+
+    <div class=" flex-grow-1 container-p-y">
+        <div class="row">
+            <div class="col-xl">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <form asp-action="AddNewVacationApplication">
+                            <div class="mb-3">
+                                <label asp-for="StartDate" class="control-label"></label>
+                                <input asp-for="StartDate" class="form-control" />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label asp-for="Days" class="control-label"></label>
+                                <input asp-for="Days" class="form-control" />
+                                <span asp-validation-for="Days" class="text-danger"></span>
+                            </div>
+
+                            <button type="submit" value="Create" class="btn btn-primary">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-backdrop fade"></div>
+</div>
+
